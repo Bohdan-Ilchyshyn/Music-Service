@@ -1,1 +1,1 @@
-web: gunicorn SMKteam.wsgi --log-file -
+web: gunicorn MusicService.wsgi --log-file -
