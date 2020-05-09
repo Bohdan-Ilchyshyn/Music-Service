@@ -8,3 +8,4 @@ gunicorn
 dj-database-url==0.5.0
 django-heroku
 django-cleanup
+Pillow
