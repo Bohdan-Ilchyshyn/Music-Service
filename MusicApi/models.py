@@ -1,8 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
+from functools import partial
+
 
 GENRE = (
     ("Unknown", "Unknown"),
     ("Movie", "Movie"),
+    ("Rap", "Rap"),
     ("Pop", "Pop"),
     ("Rock", "Rock"),
     ("Alternative/Indie", "Alternative/Indie"),
@@ -13,19 +17,38 @@ GENRE = (
 )
 
 
+def make_filepath(field_name, instance, filename):
+    new_filename = "%s.%s" % (User.objects.make_random_password(10),
+                              filename.split('.')[-1])
+    return '/'.join([instance.__class__.__name__.lower(),
+                     field_name, new_filename])
+
+
 class Artist(models.Model):
+    nick_name = models.CharField(max_length=200, default='Def')
     first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200, blank=True)
+    last_name = models.CharField(max_length=200)
+    history = models.TextField(blank=True)
+    photo = models.ImageField(upload_to=partial(make_filepath, 'artist_photo/'), blank=True)
 
     def __str__(self):
-        return self.first_name + '' + self.last_name
+        return self.first_name + ' ' + self.last_name
+
+
+class Band(models.Model):
+    name = models.CharField(max_length=200)
+    cover = models.ImageField(upload_to=partial(make_filepath, 'band_covers/'))
 
 
 class Album(models.Model):
     name = models.CharField(max_length=45, null=False)
     genre = models.CharField(max_length=200, choices=GENRE, default=GENRE[0][0])
-    cover = models.ImageField(upload_to='media/covers/')
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True, blank=True)
+    cover = models.ImageField(upload_to=partial(make_filepath, 'album_covers/'))
+    single = models.BooleanField(default=False)
+    description = models.TextField(null=True, blank=True)
+    artists = models.ManyToManyField(Artist, null=True, blank=True, related_name='album_artist')
+    band = models.ForeignKey(Band, on_delete=models.DO_NOTHING, null=True, blank=True,
+                             default=None, related_name='album_band')
 
     def __str__(self):
         return self.name
@@ -33,8 +56,8 @@ class Album(models.Model):
 
 class Music(models.Model):
     name = models.CharField(max_length=45, null=False)
-    file = models.FileField(upload_to='media/musics/')
-    album = models.ForeignKey(Album, on_delete=models.CASCADE, null=True)
+    file = models.FileField(upload_to=partial(make_filepath, 'musics/'))
+    albums = models.ForeignKey(Album, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
@@ -42,8 +65,9 @@ class Music(models.Model):
 
 class Playlist(models.Model):
     name = models.CharField(max_length=45, null=False)
-    cover = models.ImageField(upload_to='media/covers/')
-    playlist = models.ForeignKey(Music, on_delete=models.DO_NOTHING, null=True, blank=True)
+    cover = models.ImageField(upload_to=partial(make_filepath, 'pl_covers/'))
+    musics = models.ManyToManyField(Music, null=True)
+    private = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
