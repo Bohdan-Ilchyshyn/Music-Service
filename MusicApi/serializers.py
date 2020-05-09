@@ -24,3 +24,9 @@ class PlaylistSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Playlist
         fields = ('name', 'cover', 'musics')
+
+
+class BandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Band
+        fields = ('name', 'cover', 'album_band')

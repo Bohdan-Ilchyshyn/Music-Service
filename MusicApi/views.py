@@ -14,6 +14,11 @@ class AlbumViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.AlbumSerializer
 
 
+class BandViewSet(viewsets.ModelViewSet):
+    queryset = models.Band.objects.all()
+    serializer_class = serializers.BandSerializer
+
+
 class MusicViewSet(viewsets.ModelViewSet):
     queryset = models.Music.objects.all()
     serializer_class = serializers.MusicSerializer
