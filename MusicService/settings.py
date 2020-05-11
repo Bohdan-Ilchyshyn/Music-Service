@@ -49,6 +49,10 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'MusicApi',
     'authentication',
+
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
 ]
 
 SITE_ID = 1
@@ -142,8 +146,17 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hzbnvfq6k',
+    'API_KEY': '996648193671586',
+    'API_SECRET': 'cxm0ArekN3z1NfgPne2e8MfEsVA',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # Custom user model
 AUTH_USER_MODEL = 'authentication.User'
