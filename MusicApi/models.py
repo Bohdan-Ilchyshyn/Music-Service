@@ -2,7 +2,6 @@ from django.db import models
 from authentication.models import User
 from functools import partial
 
-
 GENRE = (
     ("Unknown", "Unknown"),
     ("Movie", "Movie"),

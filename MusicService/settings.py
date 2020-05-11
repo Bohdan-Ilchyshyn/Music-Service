@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
+import cloudinary
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -37,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
+    'cloudinary_storage',
+
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'rest_framework',
@@ -50,7 +55,6 @@ INSTALLED_APPS = [
     'MusicApi',
     'authentication',
 
-    'cloudinary_storage',
     'cloudinary',
 ]
 
@@ -145,17 +149,17 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
 
-# MEDIA_URL = '/media/'
+
 # MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
 
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'hzbnvfq6k',
     'API_KEY': '996648193671586',
-    'API_SECRET': 'cxm0ArekN3z1NfgPne2e8MfEsVA',
+    'API_SECRET': 'cxm0ArekN3z1NfgPne2e8MfEsVA'
 }
+MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 
 # Custom user model
 AUTH_USER_MODEL = 'authentication.User'
