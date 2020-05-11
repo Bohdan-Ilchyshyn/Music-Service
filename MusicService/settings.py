@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'authentication',
 
     'cloudinary_storage',
-    'django.contrib.staticfiles',
     'cloudinary',
 ]
 
