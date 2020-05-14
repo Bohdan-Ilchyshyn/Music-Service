@@ -4,11 +4,11 @@ from .views import PlaylistViewSet, AlbumViewSet, ArtistViewSet, MusicViewSet, B
 
 
 router = DefaultRouter()
-router.register('playlists', PlaylistViewSet)
-router.register('artists', ArtistViewSet)
-router.register('musics', MusicViewSet)
-router.register('albums', AlbumViewSet)
-router.register('bands', BandViewSet)
+router.register('playlists', PlaylistViewSet, 'playlists')
+router.register('artists', ArtistViewSet, 'artists')
+router.register('musics', MusicViewSet, 'musics')
+router.register('albums', AlbumViewSet, 'albums')
+router.register('bands', BandViewSet, 'bands')
 
 urlpatterns = [
     path('', include(router.urls)),
