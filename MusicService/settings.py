@@ -154,9 +154,9 @@ STATIC_URL = '/static/'
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'hksirinod',
-    'API_KEY': '812291922355959',
-    'API_SECRET': 'tWJDABZ5dWd_V92yf5NWTtudBbA'
+    'CLOUD_NAME': 'hhnj8jqpj',
+    'API_KEY': '719591893217337',
+    'API_SECRET': 'QqHTjSJP1lAL8qrAMdjeVAtSrsk'
 }
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
