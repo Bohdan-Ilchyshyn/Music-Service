@@ -5,28 +5,28 @@ from . import models
 class MusicSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Music
-        fields = ('name', 'albums', 'file')
+        fields = ('id','name', 'albums', 'file')
 
 
 class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Album
-        fields = ('name', 'artists', 'band', 'genre', 'cover', 'single', 'description')
+        fields = ('id', 'name', 'artists', 'band', 'genre', 'cover', 'single', 'description', 'music_album')
 
 
 class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Artist
-        fields = ('nick_name', 'photo', 'first_name', 'last_name', 'history', 'album_artist')
+        fields = ('id', 'nick_name', 'photo', 'first_name', 'last_name', 'history', 'album_artist')
 
 
 class PlaylistSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Playlist
-        fields = ('name', 'cover', 'musics')
+        fields = ('id', 'name', 'cover', 'musics')
 
 
 class BandSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Band
-        fields = ('name', 'cover', 'album_band')
+        fields = ('id', 'name', 'cover', 'album_band')

@@ -52,5 +52,18 @@ class MusicViewSet(viewsets.ModelViewSet):
 
 
 class ArtistViewSet(viewsets.ModelViewSet):
-    queryset = models.Artist.objects.all()
     serializer_class = serializers.ArtistSerializer
+
+    def get_queryset(self):
+        queryset = models.Artist.objects.all()
+        count = self.request.query_params.get('count')
+        if count:
+            q_from = self.ran(len(queryset) - int(count))
+            if q_from < 0:
+                q_from = 0
+            queryset = queryset[q_from: q_from + int(count)]
+
+        return queryset
+
+    def ran(self, num):
+        return randint(0, num)

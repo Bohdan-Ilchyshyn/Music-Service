@@ -2,6 +2,7 @@ from django.db import models
 from authentication.models import User
 from functools import partial
 
+
 GENRE = (
     ("Unknown", "Unknown"),
     ("Movie", "Movie"),
@@ -55,8 +56,8 @@ class Album(models.Model):
 
 class Music(models.Model):
     name = models.CharField(max_length=45, null=False)
-    file = models.FileField(upload_to=partial(make_filepath, 'musics/'))
-    albums = models.ForeignKey(Album, on_delete=models.CASCADE, null=True)
+    file = models.CharField(max_length=200)
+    albums = models.ForeignKey(Album, on_delete=models.CASCADE, null=True, related_name='music_album')
 
     def __str__(self):
         return self.name
