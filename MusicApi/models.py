@@ -56,7 +56,7 @@ class Album(models.Model):
 
 class Music(models.Model):
     name = models.CharField(max_length=45, null=False)
-    file = models.CharField(max_length=200)
+    file = models.TextField()
     albums = models.ForeignKey(Album, on_delete=models.CASCADE, null=True, related_name='music_album')
 
     def __str__(self):
@@ -65,9 +65,10 @@ class Music(models.Model):
 
 class Playlist(models.Model):
     name = models.CharField(max_length=45, null=False)
-    cover = models.ImageField(upload_to=partial(make_filepath, 'pl_covers/'))
-    musics = models.ManyToManyField(Music, null=True)
+    cover = models.ImageField(upload_to=partial(make_filepath, 'pl_covers/'), blank=True)
+    musics = models.ManyToManyField(Music, null=True, blank=True)
     private = models.BooleanField(default=False)
+    # users = models.ManyToManyField(User,  null=True, blank=True, related_name='pl_user')
 
     def __str__(self):
         return self.name
