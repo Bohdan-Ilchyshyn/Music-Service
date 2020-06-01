@@ -38,7 +38,7 @@ class Artist(models.Model):
 class Band(models.Model):
     name = models.CharField(max_length=200)
     cover = models.ImageField(upload_to=partial(make_filepath, 'band_covers/'))
-    history = models.TextField(blank=True)
+    history = models.TextField(blank=True, null=True, default="")
 
 
 class Album(models.Model):
